@@ -1,17 +1,6 @@
 
 			@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 
-			
-
-			body {
-				font-family: 'Lato';
-				background-color: #f7f7f7;
-				margin: 0px auto;
-				max-width: 1150px;
-			}
-
-			
-
 			#overlay {
 				position: absolute;
 				top: 0px;
@@ -45,8 +34,9 @@
 
 			#container {
 				position : relative;
-				width : 370px;
-				/*margin : 0px auto;*/
+				/* width : 370px; */
+				width: 100%;
+				margin : 0px auto;
 			}
 
 			
@@ -112,7 +102,9 @@
 
 			#emotion_chart, #emotion_icons {
 				margin: 0 auto;
-				width : 400px;
+				/* width : 400px; */
+				width: 100%;
+				max-width : 400px;
 			}
 
 

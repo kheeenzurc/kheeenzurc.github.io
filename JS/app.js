@@ -45,6 +45,7 @@ function drawLoop() {
 ctrack.init(pModel);
 var ec = new emotionClassifier;
 ec.init(emotionModel);
+console.log(screen.width)
 var emotionData = ec.getBlank(),
     margin = {
         top: 20,
@@ -52,7 +53,7 @@ var emotionData = ec.getBlank(),
         bottom: 10,
         left: 40
     },
-    width = 400 - margin.left - margin.right,
+    width = (screen.width > 500 ? 400 : screen.width - 50) - margin.left - margin.right,
     height = 100 - margin.top - margin.bottom,
     barWidth = 30,
     formatPercent = d3.format(".0%"),

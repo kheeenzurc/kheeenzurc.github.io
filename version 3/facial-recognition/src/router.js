@@ -29,7 +29,7 @@ export default new Router({
     {
       path: '/admin',
       name: 'dashboard',
-      component: Dashboard
+      component: () => import('./views/admin/Dashboard.vue')
     },
     {
       path: '/admin/settings',

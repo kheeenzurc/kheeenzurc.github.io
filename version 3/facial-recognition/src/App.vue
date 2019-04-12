@@ -15,8 +15,8 @@
         </v-btn>
 
         <v-btn flat color="primary">
-          <router-link to="/admin">
-            Admin
+          <router-link to="/admin/settings">
+            Settings
           </router-link>
         </v-btn>
     </v-toolbar>

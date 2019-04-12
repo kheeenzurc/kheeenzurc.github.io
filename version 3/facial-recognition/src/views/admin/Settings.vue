@@ -52,10 +52,16 @@
       trainModel(){
         const WEBCAM = document.getElementById('webcam')
         console.log(tf)
-        // const img= tf.fromPixels(this.$children[0].webcam.webcamElement);
-        // const logits = this.mobilenet.infer(img, 'conv_preds');
+        
+        try{
+          const img= tf.fromPixels(this.$children[0].webcam.webcamElement);
+          const logits = this.mobilenet.infer(img, 'conv_preds');
 
-        // this.classifier.addExample(logits, parseInt(this.emotion));
+          this.classifier.addExample(logits, parseInt(this.emotion));
+
+        } catch (error) {
+          console.log(error)
+        }
       },
     }
   }

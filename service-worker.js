@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a61a631c9cda85caf8453f1012bac6ab.js"
+  "/precache-manifest.a3fcccf5ddc74f16298aa93bc6bb736a.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "facial-recognition"});

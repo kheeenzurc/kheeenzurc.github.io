@@ -13,6 +13,12 @@
             About
           </router-link>
         </v-btn>
+
+        <v-btn flat color="primary">
+          <router-link to="/admin">
+            Admin
+          </router-link>
+        </v-btn>
     </v-toolbar>
 
     <v-content>

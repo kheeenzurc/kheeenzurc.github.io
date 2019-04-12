@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <img alt="Pusher logo" src="./assets/pusher.jpg" height="100px">
-    <router-view/>
+    <v-container>
+      <router-view/>
+    </v-container>
   </div>
 </template>
 

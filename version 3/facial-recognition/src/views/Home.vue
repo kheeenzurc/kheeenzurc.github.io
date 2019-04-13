@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-layout>
-      <v-flex>
+      <v-flex class="text-xs-center">
         <template v-if="mode == 'train'">
             <h1>Take pictures that define your different moods in the dropdown</h1>
         </template>
@@ -14,24 +14,42 @@
       <v-flex md5>
         <v-card>
           <v-card-text>
-            <select id="use_case" v-on:change="changeOption()">
+            <!-- <select id="use_case" v-on:change="changeOption()">
                 <option value="train">Train</option>
                 <option value="test">Test</option>
-            </select>
+            </select> -->
+            <v-layout>
+              <v-flex>
+                <v-btn block @click="changeOption('test')">Test</v-btn>
+              </v-flex>
+              <v-flex>
+                <v-btn block @click="changeOption('train')">Train</v-btn>
+              </v-flex>
+            </v-layout>
             <Camera></Camera>
             <template v-if="mode == 'train'">
-                <select id="emotion_options">
+                <!-- <select id="emotion_options">
                     <template v-for="(emotion, index) in emotions">
                         <option :key="index" :value="index">{{emotion}}</option>
                     </template>
-                </select>
-                <v-btn color="info" v-on:click="trainModel()">Train Model</v-btn>
+                </select> -->
+                <v-radio-group id="emotion_options" v-model="__class">
+                  <v-radio
+                    v-for="(emotion, indx) in emotions"
+                    :key="indx"
+                    :label="emotion"
+                    :value="indx"
+                    name="test"
+                  ></v-radio>
+                </v-radio-group>
+                <v-btn color="info" block v-on:click="trainModel()">Train Model</v-btn>
             </template>
             <template v-else>
-                <v-btn  color="info" v-on:click="getEmotion()">Get Emotion</v-btn>
+                <v-btn block color="info" v-on:click="getEmotion()">Get Emotion</v-btn>
             </template>
-
-            <h1>{{ detected_e }}</h1>
+            <v-card light v-if="detected_e">
+              <v-card-text>{{ detected_e }}</v-card-text>
+            </v-card>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -57,9 +75,9 @@ export default {
           emotions: ['angry','neutral', 'happy'],
           classifier: null,
           mobilenet: null,
-          class: null,
+          __class: null,
           detected_e: null,
-          mode: 'train',
+          mode: 'train'
       }
   },
   mounted: function(){
@@ -72,15 +90,11 @@ export default {
         this.mobilenet = await mobilenetModule.load();
       },
       trainModel(){
-        let selected = document.getElementById("emotion_options");
-        this.class = selected.options[selected.selectedIndex].value;
-        this.addExample();
-      },
-      addExample(){
-        const img= tf.fromPixels(this.$children[0].webcam.webcamElement);
+        const videoElement = this.$children[0].$children[2].webcam.webcamElement
+        const img= tf.fromPixels(videoElement);
         const logits = this.mobilenet.infer(img, 'conv_preds');
-        this.classifier.addExample(logits, parseInt(this.class));
-        console.log(this.classifier, logits)
+        this.classifier.addExample(logits, parseInt(this.__class));
+        console.log(this.__class, logits)
       },
       async getEmotion(){
         const img = tf.fromPixels(this.$children[0].webcam.webcamElement);
@@ -90,9 +104,8 @@ export default {
         this.detected_e = this.emotions[pred.classIndex];
         this.registerEmotion();
       },
-      changeOption(){
-          const selected = document.getElementById("use_case");
-          this.mode = selected.options[selected.selectedIndex].value;
+      changeOption(mode){
+          this.mode = mode;
       },
       registerEmotion(){
           axios.post('http://localhost:3128/callback', {

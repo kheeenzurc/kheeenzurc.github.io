@@ -3,7 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 import Vuetify from 'vuetify';
 // index.js or main.js
-import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+import 'vuetify/dist/vuetify.min.css'; // Ensure you are using css-loader
+
+// Helpers
+import colors from 'vuetify/es5/util/colors';
 
 Vue.use(Vuetify)
 Vue.config.productionTip = false;

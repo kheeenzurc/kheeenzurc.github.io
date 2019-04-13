@@ -28,7 +28,7 @@
                 <v-btn color="info" v-on:click="trainModel()">Train Model</v-btn>
             </template>
             <template v-else>
-                <v-btn  color="info" v-on:click="getEmotion()">Get Emotion</v-btn>
+                <v-btn color="info" v-on:click="getEmotion()">Get Emotion</v-btn>
             </template>
 
             <h1>{{ detected_e }}</h1>
